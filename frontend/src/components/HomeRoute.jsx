@@ -9,17 +9,19 @@ const HomeRoute = () => {
 
   const changeFavourites = (photoData) => {
     const isFav = favourites.some((photo) => photo.id === photoData.id);
-  
+    
     if (isFav) {
       setFavourites(favourites.filter((photo) => photo.id !== photoData.id));
     } else {
       setFavourites([...favourites, photoData]);
     }
   };
+  
+  const hasFavouritedPhotos = favourites.length > 0;
 
   return (
     <div className="HomeRoute">
-      <TopNavigationBar />
+      <TopNavigationBar hasFavouritedPhotos={hasFavouritedPhotos}/>
       <PhotoList favourites={favourites} changeFavourites={changeFavourites} />
     </div>
   );
