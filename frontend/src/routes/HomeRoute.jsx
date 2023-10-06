@@ -4,7 +4,8 @@ import '../styles/HomeRoute.scss'
 import PhotoList from '../components/PhotoList';
 import TopNavigationBar from '../components/TopNavigationBar';
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
+  const { toggleModal } = props;
   const [favourites, setFavourites] = useState([]);
 
   const changeFavourites = (photoData) => {
@@ -22,7 +23,7 @@ const HomeRoute = () => {
   return (
     <div className="HomeRoute">
       <TopNavigationBar hasFavouritedPhotos={hasFavouritedPhotos}/>
-      <PhotoList favourites={favourites} changeFavourites={changeFavourites} />
+      <PhotoList favourites={favourites} changeFavourites={changeFavourites} toggleModal={toggleModal} />
     </div>
   );
 };

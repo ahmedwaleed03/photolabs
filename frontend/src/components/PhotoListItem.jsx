@@ -4,7 +4,7 @@ import PhotoFavButton from './PhotoFavButton';
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
-  const { dataForPhotoListItem, favourites, changeFavourites } = props;
+  const { dataForPhotoListItem, favourites, changeFavourites, toggleModal } = props;
 
   const handleFavClick = () => {
     changeFavourites(dataForPhotoListItem);
@@ -13,7 +13,7 @@ const PhotoListItem = (props) => {
   const isFav = favourites.some((photo) => photo.id === dataForPhotoListItem.id);
 
   return(
-    <div className="photo-list__item">
+    <div className="photo-list__item" onClick={toggleModal}>
       <div className="photo-list__fav-button">
       <PhotoFavButton onClick={handleFavClick} isFav={isFav} />
       </div>
