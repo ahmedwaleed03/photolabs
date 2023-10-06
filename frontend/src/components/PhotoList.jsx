@@ -5,11 +5,11 @@ import PhotoListItem from "./PhotoListItem";
 import photos from "../mocks/photos"
 
 const PhotoList = (props) => {
-  const { favourites, changeFavourites, toggleModal } = props;
+  const { favourites, changeFavourites, openModal } = props;
   return (
     <ul className="photo-list">
       {photos.map((photoData, index) => (
-        <PhotoListItem key={index} dataForPhotoListItem={photoData} favourites={favourites} changeFavourites={changeFavourites} toggleModal={toggleModal} />
+        <PhotoListItem key={index} dataForPhotoListItem={photoData} favourites={favourites} changeFavourites={changeFavourites} openModal={openModal} />
       ))}
     </ul>
   );

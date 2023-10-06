@@ -4,7 +4,8 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
-  const { closeModal } = props;
+  const { closeModal, selectedPhoto } = props;
+  console.log(JSON.stringify(selectedPhoto));
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={closeModal}>
