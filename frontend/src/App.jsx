@@ -7,6 +7,17 @@ import './App.scss';
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [favourites, setFavourites] = useState([]);
+
+  const changeFavourites = (photoData) => {
+    const isFav = favourites.some((photo) => photo.id === photoData.id);
+    
+    if (isFav) {
+      setFavourites(favourites.filter((photo) => photo.id !== photoData.id));
+    } else {
+      setFavourites([...favourites, photoData]);
+    }
+  };
 
   const openModal = (photoData) => {
     setSelectedPhoto(photoData);
@@ -20,8 +31,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute openModal={openModal}/>
-      {isModalOpen && <PhotoDetailsModal closeModal={closeModal} selectedPhoto={selectedPhoto}/> }
+      <HomeRoute openModal={openModal} favourites={favourites} changeFavourites={changeFavourites}/>
+      {isModalOpen && <PhotoDetailsModal closeModal={closeModal} selectedPhoto={selectedPhoto} favourites={favourites} changeFavourites={changeFavourites}/> }
     </div>
   );
 };
