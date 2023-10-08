@@ -13,11 +13,11 @@ const PhotoListItem = (props) => {
   const isFav = favourites.some((photo) => photo.id === dataForPhotoListItem.id);
 
   return(
-    <div className="photo-list__item" onClick={() => openModal(dataForPhotoListItem)}>
+    <div className="photo-list__item">
       <div className="photo-list__fav-button">
       <PhotoFavButton onClick={handleFavClick} isFav={isFav} />
       </div>
-      <img src={dataForPhotoListItem.urls.regular} className="photo-list__image" />
+      <img src={dataForPhotoListItem.urls.regular} className="photo-list__image" onClick={() => openModal(dataForPhotoListItem)}/>
       <div className="photo-list__user-details">
         <img src={dataForPhotoListItem.user.profile} className="photo-list__user-profile"/>
         <div className="photo-list__user-info">
