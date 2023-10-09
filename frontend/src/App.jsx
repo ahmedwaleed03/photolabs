@@ -6,7 +6,7 @@ import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
 import './App.scss';
 
 const App = () => {
-  const { state, dispatch } = useApplicationData();
+  const { state, dispatch, fetchPhotosByTopicId } = useApplicationData();
 
   const openModal = (photoData) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photoData });
@@ -25,6 +25,7 @@ const App = () => {
         }}
         photos={state.photoData}
         topics={state.topicData}
+        fetchPhotosByTopicId={fetchPhotosByTopicId}
       />
       {state.isModalOpen && 
       <PhotoDetailsModal 

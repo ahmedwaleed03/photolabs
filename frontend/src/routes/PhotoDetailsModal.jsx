@@ -4,7 +4,6 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
-import PhotoListItem from 'components/PhotoListItem';
 
 const PhotoDetailsModal = (props) => {
   const { closeModal, selectedPhoto, favourites, addFavourites, removeFavourites } = props;
