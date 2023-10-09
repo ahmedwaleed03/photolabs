@@ -1,7 +1,5 @@
-# react-photolabs
-The PhotoLabs project for the Web Development React course programming.
-
 # Photolabs
+A react project where the user is able to view photos in mulitiple contexts.
 
 ## Setup
 
@@ -22,3 +20,10 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+
+## Final Product
+
+!["Homepage"](https://github.com/ahmedwaleed03/photolabs/blob/main/docs/Homepage.png?raw=true)
+!["Modal View"](https://github.com/ahmedwaleed03/photolabs/blob/main/docs/Modal%20View.png?raw=true)
+!["Similar Images"](https://github.com/ahmedwaleed03/photolabs/blob/main/docs/Similar%20Photos.png?raw=true)
+!["Image favourited"](https://github.com/ahmedwaleed03/photolabs/blob/main/docs/Favourited%20Image.png?raw=true)
