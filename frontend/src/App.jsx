@@ -9,7 +9,7 @@ const App = () => {
   const { state, dispatch } = useApplicationData();
 
   const openModal = (photoData) => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, value: photoData });
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photoData });
   };
 
   return (
@@ -18,24 +18,26 @@ const App = () => {
         openModal={openModal} 
         favourites={state.favourites} 
         addFavourites={(photoData) => {
-          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoData }); // Dispatch the FAV_PHOTO_ADDED action
         }}
         removeFavourites={(photoData) => {
-          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoData }); // Dispatch the FAV_PHOTO_ADDED action
         }}
+        photos={state.photoData}
+        topics={state.topicData}
       />
       {state.isModalOpen && 
       <PhotoDetailsModal 
         closeModal={() => {
-          dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, value: false }); // Dispatch the DISPLAY_PHOTO_DETAILS action
+          dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: false }); // Dispatch the DISPLAY_PHOTO_DETAILS action
         }}
         selectedPhoto={state.selectedPhoto} 
         favourites={state.favourites} 
         addFavourites={(photoData) => {
-          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoData }); // Dispatch the FAV_PHOTO_ADDED action
         }}
         removeFavourites={(photoData) => {
-          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoData }); // Dispatch the FAV_PHOTO_ADDED action
         }}
       /> }
     </div>

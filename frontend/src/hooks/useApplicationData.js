@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -14,35 +14,35 @@ function reducer(state, action) {
     case ACTIONS.FAV_PHOTO_ADDED:
       return {
         ...state,
-        favourites: [...state.favourites, action.value]
+        favourites: [...state.favourites, action.payload]
       };
     case ACTIONS.FAV_PHOTO_REMOVED:
       return {
         ...state,
         favourites: state.favourites.filter(
-          (photo) => photo.id !== action.value.id
+          (photo) => photo.id !== action.payload .id
         )
       };
     case ACTIONS.SET_PHOTO_DATA:
       return {
         ...state,
-        photoData: action.value
+        photoData: action.payload 
       };
     case ACTIONS.SET_TOPIC_DATA:
       return {
         ...state,
-        topicData: action.value
+        topicData: action.payload 
       };
     case ACTIONS.SELECT_PHOTO:
       return {
         ...state,
-        selectedPhoto: action.value,
+        selectedPhoto: action.payload,
         isModalOpen: true
       };
     case ACTIONS.DISPLAY_PHOTO_DETAILS:
       return {
         ...state,
-        isModalOpen: action.value
+        isModalOpen: action.payload 
       };
 
     default:
@@ -55,13 +55,35 @@ function reducer(state, action) {
 const useApplicationData = () => {
   const initialState = {
     favourites: [],
-    photoData: null,
-    topicData: null,
+    photoData: [],
+    topicData: [],
     selectedPhoto: null,
     isModalOpen: false
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error("Error fetching photoData:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
+      })
+      .catch((error) => {
+        console.error("Error fetching topicData:", error);
+      });
+  }, []);
 
   return {
     state,
