@@ -2,25 +2,42 @@ import React, { useState } from 'react';
 
 import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
-import useApplicationData from './hooks/useApplicationData'; 
+import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
 import './App.scss';
 
 const App = () => {
-  const {
-    state,
-    updateToFavPhotoIds,
-    setPhotoSelected,
-    onClosePhotoDetailsModal,
-  } = useApplicationData();
+  const { state, dispatch } = useApplicationData();
 
   const openModal = (photoData) => {
-    setPhotoSelected(photoData);
+    dispatch({ type: ACTIONS.SELECT_PHOTO, value: photoData });
   };
 
   return (
     <div className="App">
-      <HomeRoute openModal={openModal} favourites={state.favourites} changeFavourites={updateToFavPhotoIds}/>
-      {state.isModalOpen && <PhotoDetailsModal closeModal={onClosePhotoDetailsModal} selectedPhoto={state.selectedPhoto} favourites={state.favourites} changeFavourites={updateToFavPhotoIds}/> }
+      <HomeRoute 
+        openModal={openModal} 
+        favourites={state.favourites} 
+        addFavourites={(photoData) => {
+          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+        }}
+        removeFavourites={(photoData) => {
+          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+        }}
+      />
+      {state.isModalOpen && 
+      <PhotoDetailsModal 
+        closeModal={() => {
+          dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, value: false }); // Dispatch the DISPLAY_PHOTO_DETAILS action
+        }}
+        selectedPhoto={state.selectedPhoto} 
+        favourites={state.favourites} 
+        addFavourites={(photoData) => {
+          dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+        }}
+        removeFavourites={(photoData) => {
+          dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, value: photoData }); // Dispatch the FAV_PHOTO_ADDED action
+        }}
+      /> }
     </div>
   );
 };

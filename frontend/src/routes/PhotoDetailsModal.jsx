@@ -6,15 +6,10 @@ import PhotoList from '../components/PhotoList';
 import PhotoListItem from 'components/PhotoListItem';
 
 const PhotoDetailsModal = (props) => {
-  const { closeModal, selectedPhoto, favourites, changeFavourites } = props;
+  const { closeModal, selectedPhoto, favourites, addFavourites, removeFavourites } = props;
 
   const similarPhotos = Object.values(selectedPhoto.similar_photos);
 
-  const handleFavClick = () => {
-    changeFavourites(selectedPhoto);
-  };
-
-  const isFav = favourites.some((photo) => photo.id === selectedPhoto.id);
 
   return (
     <div className="photo-details-modal">
@@ -26,7 +21,8 @@ const PhotoDetailsModal = (props) => {
           <PhotoListItem
             dataForPhotoListItem={selectedPhoto}
             favourites={favourites}
-            changeFavourites={changeFavourites}
+            addFavourites={addFavourites} 
+            removeFavourites={removeFavourites}
             openModal={null}
           />
         </div>
@@ -37,7 +33,8 @@ const PhotoDetailsModal = (props) => {
           <PhotoList
             openModal={null}
             favourites={favourites} 
-            changeFavourites={changeFavourites}
+            addFavourites={addFavourites} 
+            removeFavourites={removeFavourites}
             photos={similarPhotos}
           />
         </div>

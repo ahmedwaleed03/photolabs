@@ -6,14 +6,14 @@ import TopNavigationBar from '../components/TopNavigationBar';
 import photos from "../mocks/photos"
 
 const HomeRoute = (props) => {
-  const { openModal, favourites, changeFavourites } = props;
+  const { openModal, favourites, addFavourites, removeFavourites } = props;
   
   const hasFavouritedPhotos = favourites.length > 0;
 
   return (
     <div className="HomeRoute">
       <TopNavigationBar hasFavouritedPhotos={hasFavouritedPhotos}/>
-      <PhotoList favourites={favourites} changeFavourites={changeFavourites} openModal={openModal} photos={photos} />
+      <PhotoList favourites={favourites} addFavourites={addFavourites} removeFavourites={removeFavourites} openModal={openModal} photos={photos} />
     </div>
   );
 };
