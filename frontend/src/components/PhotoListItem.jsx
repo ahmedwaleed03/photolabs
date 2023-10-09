@@ -19,7 +19,7 @@ const PhotoListItem = (props) => {
   return(
     <div className="photo-list__item">
       <div className="photo-list__fav-button">
-      <PhotoFavButton onClick={handleFavClick} isFav={isFav} />
+        <PhotoFavButton onClick={handleFavClick} isFav={isFav} />
       </div>
       <img src={dataForPhotoListItem.urls.regular} className="photo-list__image" onClick={() => openModal && openModal(dataForPhotoListItem)}/>
       <div className="photo-list__user-details">

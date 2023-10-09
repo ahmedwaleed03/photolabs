@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoListItem from 'components/PhotoListItem';
 
 const PhotoDetailsModal = (props) => {
@@ -10,6 +11,15 @@ const PhotoDetailsModal = (props) => {
 
   const similarPhotos = Object.values(selectedPhoto.similar_photos);
 
+  const isFav = favourites.some((photo) => photo.id === selectedPhoto.id);
+ 
+  const handleFavClick = () => {
+    if (isFav) {
+      removeFavourites(selectedPhoto);
+    } else {
+      addFavourites(selectedPhoto)
+    }
+  };
 
   return (
     <div className="photo-details-modal">
@@ -17,18 +27,26 @@ const PhotoDetailsModal = (props) => {
         <img src={closeSymbol} alt="close symbol" />
       </button>
       {selectedPhoto && (
-        <div className="photo-details-modal__header">
-          <PhotoListItem
-            dataForPhotoListItem={selectedPhoto}
-            favourites={favourites}
-            addFavourites={addFavourites} 
-            removeFavourites={removeFavourites}
-            openModal={null}
-          />
+      <div className="photo-details-modal__images ">
+        <div className="photo-list__fav-button">
+          <PhotoFavButton onClick={handleFavClick} isFav={isFav} />
         </div>
+        <img src={selectedPhoto.urls.full} className="photo-details-modal__image"/>
+          <div className="photo-details-modal__photographer-details">
+            <img src={selectedPhoto.user.profile} className="photo-details-modal__photographer-profile"/>
+            <div className="photo-details-modal__photographer-info">
+              <div className="photo-details-modal__photographer-name">
+                {selectedPhoto.user.name}
+              </div>
+              <div className="photo-details-modal__photographer-location">
+                {selectedPhoto.location.city}, {selectedPhoto.location.country}
+              </div>
+            </div>
+          </div>
+        <p className='photo-details-modal__header'>Similar Photos</p>
+      </div>
       )}
       <div className="photo-details-modal__header">
-        <p>Similar Photos</p>
         <div className="photo-details-modal__images">
           <PhotoList
             openModal={null}
