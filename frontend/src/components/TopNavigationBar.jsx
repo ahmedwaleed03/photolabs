@@ -5,13 +5,13 @@ import TopicList from './TopicList';
 import FavIcon from './FavIcon';
 
 const TopNavigation = (props) => {
-  const { hasFavouritedPhotos, topics, fetchPhotosByTopicId } = props;
+  const { hasFavouritedPhotos, topics, fetchPhotosByTopicId, openFavs } = props;
 
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} fetchPhotosByTopicId={fetchPhotosByTopicId} />
-      <FavIcon selected={true} displayAlert={hasFavouritedPhotos} />
+      <FavIcon onClick={openFavs}  selected={true} displayAlert={hasFavouritedPhotos} />
     </div>
   )
 }

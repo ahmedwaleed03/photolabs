@@ -7,11 +7,16 @@ import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
   const { closeModal, selectedPhoto, favourites, addFavourites, removeFavourites } = props;
+  let photos = null;
+  let isFav = false;
 
-  const similarPhotos = Object.values(selectedPhoto.similar_photos);
-
-  const isFav = favourites.some((photo) => photo.id === selectedPhoto.id);
- 
+  if (selectedPhoto) {
+    photos = Object.values(selectedPhoto.similar_photos);
+    isFav = favourites.some((photo) => photo.id === selectedPhoto.id);
+  } else {
+    photos = favourites;
+  }
+  
   const handleFavClick = () => {
     if (isFav) {
       removeFavourites(selectedPhoto);
@@ -52,7 +57,7 @@ const PhotoDetailsModal = (props) => {
             favourites={favourites} 
             addFavourites={addFavourites} 
             removeFavourites={removeFavourites}
-            photos={similarPhotos}
+            photos={photos}
           />
         </div>
       </div>

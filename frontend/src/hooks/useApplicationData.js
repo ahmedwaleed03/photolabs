@@ -7,7 +7,9 @@ export const ACTIONS = {
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   SELECT_PHOTO: 'SELECT_PHOTO',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
+  OPEN_FAVOURITES: 'OPEN_FAVOURITES',
+  CLOSE_FAVOURITES: 'CLOSE_FAVOURITES'
 }
 
 function reducer(state, action) {
@@ -50,6 +52,16 @@ function reducer(state, action) {
         ...state,
         photoData: action.payload 
       };
+    case ACTIONS.OPEN_FAVOURITES:
+      return {
+        ...state,
+        openFavourites: action.payload 
+      };
+    case ACTIONS.CLOSE_FAVOURITES:
+      return {
+        ...state,
+        openFavourites: action.payload
+      };
 
     default:
       throw new Error(
@@ -64,7 +76,8 @@ const useApplicationData = () => {
     photoData: [],
     topicData: [],
     selectedPhoto: null,
-    isModalOpen: false
+    isModalOpen: false,
+    openFavourites: false
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
