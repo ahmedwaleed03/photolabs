@@ -1,5 +1,5 @@
 # Photolabs
-A react project where the user is able to view photos in mulitiple contexts.
+A react project where the user is able to view photos in multiple contexts.
 
 ## Setup
 
